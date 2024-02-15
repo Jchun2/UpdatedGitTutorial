@@ -1,0 +1,108 @@
+\documentclass[10pt,twocolumn]{article}
+
+% use the oxycomps style file
+\usepackage{oxycomps}
+
+% usage: \fixme[comments describing issue]{text to be fixed}
+% define \fixme as not doing anything special
+\newcommand{\fixme}[2][]{#2}
+% overwrite it so it shows up as red
+\renewcommand{\fixme}[2][]{\textcolor{red}{#2}}
+% overwrite it again so related text shows as footnotes
+%\renewcommand{\fixme}[2][]{\textcolor{red}{#2\footnote{#1}}}
+
+% read references.bib for the bibtex data
+\bibliography{references}
+
+% include metadata in the generated pdf file
+\pdfinfo{
+    /Title Git Tutorial for Version Control
+    /Author (Julia Chun)
+}
+
+% set the title and author information
+\title{Git Tutorial for Version Control}
+\author{Julia Chun}
+\affiliation{Occidental College}
+\email{jchun2@oxy.edu}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+This document serves as a tutorial for beginners who are new to version control and git. In this tutorial, basic commands of Git are covered such as in-iting/cloning, adding, committing, and pushing. In addition, stashing, branching and merging will also be discussed. Rather than providing understanding oriented and information oriented content, this tutorial provides learning and problem oriented content that steps through essential concepts and methods needed to effectively utilize Git.  
+
+\section{Git, Github, and GitBash}
+For Computer Science students, there is often the need to collaborate on projects where multiple developers could work in parallel. Git is  version control system used by developers to manage and collaborate efficiently on projects. This system allows changes in source code to be tracked during code development and ensures there are no code conflicts between developers. In this tutorial, we will utilize a command-line interface (CLI) called GitBash for Windows systems. This interface allows you to communicate with Git using various commands. We will also utilize a web-based platform called GitHub which allows users to store their code remotely and access it through the network. This platform also allows for effective collaboration and management between developers where code could be manage, shared and tracked. 
+
+
+\section {Basic Commands of Git}
+Git/GitBash provides powerful commands to manage version control and collaboration on projects. Some basic commands that are fundamental for the use of effective version control usages are init, clone, commit, push, and pull. Understanding these commands will allow efficient management of projects and effective work in repositories. 
+
+\subsection{Init/Cloning}
+
+To start, navigate to your project directory in GitBash to initialize a new Git repository. To initialize a new Git repository in the current directory, 'git init' is typed on the command line. This creates a hidden directory named '.git' which stores all the necessary files and metadata for version control.  
+
+Cloning a repository in Git allows a local copy of a remote repository to be made. This will allow a duplicate of the entire project history to be made on a local machine and allows changes to be made without affecting the original remote repository. 
+
+To clone a repository, the URL of the remote repository you want to clone must be located. This could be found on the main page of the repository you would like to clone. On GitHub.com, locate and click the green '<>Code button' and under the tab 'Local', copy the URL. The URL could be copied in three types: HTTP, SSH, and GitHub CLI.  Open Git Bash and change the current working directory to the desired location. This could be done by opening your File Navigator and right clicking on the file you would like to clone our desired repository into. Choose the option 'Open GitBash here' and type "git clone" on the command line and paste the URL. 
+
+If we wanted to clone a repository already associated with our account, we could click on 'File' and 'Clone Repository'. We select the tab 'GitHub.com' which will show all the repositories that are already forked on your account on GitHub.com so you can then take a copy of that repository onto this local machine.
+
+
+\subsection{Adding}
+Adding changes involves staging modifies files for inclusion in the next commit. "Staging" refers to the process of preparing modifications for a commit. When you make modifications to files in your project, Git allows you to selectively choose which changes you would like to add in the next commit. The add command is used before the execution of the commit command. 
+
+To use the add command to add a specific file, type 'git add<path>' where path is the path of the file. To add all changes in the current directory, type 'git add .' or to add all changes in the entire repository type 
+'git add --all'. The status of the added changes may be verified by typing 'git status' where files that are staged and ready to be committed are verified. 
+\subsection{Committing}
+The git commit  commands allows saving of a project's currently staged changes. To commit a change, type "git commit" which will launch a text editor where a summary of the changes that were committed could be written. After entering the message, save the file and close the editor to create the commit. The command 'git log' could be used to view the commit history and verify that the commit was successful. This command will display a list of commits showing details such as the message, author, and date. 
+To update a commit. 
+\subsection{Pushing}
+Pushing changes sends commits made in your local repository to a remote repository such as GitHub.com. This will allow collaboration with others while keeping the remote repository updated with local changes. 
+
+After your changes have been committed, you may push them onto the remote repository using the 'git push' command followed my the name of the remote repository and branch that you want to be pushed. To verify that the changes have been successfully uploaded, check the remote branch on the hosting platform. 
+
+\subsection{Pulling}
+Pulling changes allows changes to be retrieved from a remote repository and integrating them into your local repository. 
+
+To pull changes, use the 'git pull' command to retrieve changes from the remote repository and merge them to your current branch. First type 'git pull' them type the name of the remote repository and the name of the branch changes are to be pulled from. 
+
+\section{Advanced Commands}
+As you advance in Git, you may encounter scenarios where a more nuanced approach to version control is required. Advance Git commands such as stashing, branching, and merging could provide functionalities for handling these nuanced demands.  
+
+\subsection {Stashes}
+Stashing is a feature which allows changes to be temporarily stored that are not ready to be committed yet. This could be useful when you may need to switch to a different task or branch, but am not ready to commit changes. This allows current changes to be saved while you are able to work on something different. 
+
+Before stashing, ensure working directory has no uncommitted changes. Then, use 'git stash' command on bash which may be used when you have changes to stashed but have not committed. Once your changes are stashed, you may continue working on other tasks. To revisit your stashed changes, type the 'git stash apply' command on GitBash, which will apply the changes form the most recent stash to your working directory and keep the stashed changes in the stash stack. The command 'git stash pop' could be used to apply the changes from the most recent stash to your working directory and remove the stash for the stash stack. To discard stashed changes that are no longer needed, you may remove them using the 'git stash drop' command which will remove the most recent stash from the stash stack. 
+
+\subsection {Branches}
+Branches allow you to diverge from the main line of development and work on varying features of the project locally. The main branch in Git, named 'main' represents the primary line of development and usually contains the latest version of the project's code.  Each branch in a Git repository can represent an independent line of development with its own commits. This allows effective organization and management of your project.
+
+To create a new branch from an existing branch (usually the main branch) type 'git checkout -b' and enter the name of the new branch you would like to create between '<>'. For instance, 'git checkout -b <name of branch>'. To switch branches, type 'git checkout' which will allow you to switch from working in your working directoy to a different branch.
+
+\subsection {Merging and dealing with Merge Conflicts}
+Merging allows integration of changes from one branch into another. This is typically done on a feature branch into the main branch which allows incorporation of changes into the main line of development. 
+
+To merge a branch into another branch, the target branch where changes are to be incorporated must be switched. To merge a feature branch into the main branch, switch to the main branch by typing 'git checkout main' on GitBash. Once on the target branch, type 'git merge' followed by the name of the branch to be merged on GitBash in the format 'git merge <branch-name>.
+
+When conflicts occur when Git is unable to merge changes from different branches, a "merge conflict" occurs.
+
+Git will mark the conflicted sections in the affected files when a merge conflict occurs with the less than, equals, and greater than symbols. To resolve the differences between the conflicts, removing the markers and decide which changes to keep. The 'git add' command should be used to stage the modified files and once the conflicts and resolved and stage, commit the merge. After the conflicts are resolved and the changes are committed, the merged changes may be pushed to the remote repository. 
+\section{Conclusion}
+Mastering Git for version control is a useful skill for those aiming to collaborate effectively in coding projects and maintain code integrity. Fundamental concepts and commands were covered in this tutorial to aid with navigating version control with Git and utilize platforms such as GitHub. 
+
+
+
+
+
+
+
+
+
+
+\printbibliography
+
+\end{document}
